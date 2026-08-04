@@ -37,19 +37,17 @@ p{color:var(--ink)}
 .btn-dark:hover{background:var(--ink-2);transform:translateY(-1px)}
 
 /* header */
-header{position:sticky;top:0;z-index:50;background:rgba(16,24,32,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
-.brand{display:flex;align-items:center;gap:12px;color:#fff}
-.brand .mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-deep));display:grid;place-items:center;font-weight:900;color:#fff;font-size:18px}
-.brand b{font-size:17px;letter-spacing:-.01em}
-.brand small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 12px rgba(16,24,32,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;height:96px}
+.brand{display:flex;align-items:center;color:var(--ink)}
+.brand img{height:60px;width:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:26px}
-.nav-links a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:600}
-.nav-links a:hover{color:#fff}
+.nav-links a{color:var(--ink-2);font-size:14.5px;font-weight:600}
+.nav-links a:hover{color:var(--accent)}
 .nav-cta{display:flex;align-items:center;gap:14px}
-.nav-phone{color:#fff;font-weight:800;font-size:15px}
-.nav-phone small{display:block;font-size:10px;color:rgba(255,255,255,.55);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-.burger{display:none;background:none;border:0;color:#fff;font-size:26px}
+.nav-phone{color:var(--ink);font-weight:800;font-size:15px;white-space:nowrap}
+.nav-phone small{display:block;font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.burger{display:none;background:none;border:0;color:var(--ink);font-size:26px;line-height:1}
 
 /* hero */
 .hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
@@ -207,11 +205,18 @@ footer a:hover{color:#fff}
   .clients-grid{grid-template-columns:repeat(3,1fr)}
   .kb-grid{grid-template-columns:1fr}
   .foot{grid-template-columns:1fr 1fr}
+  .nav{height:80px}
+  .brand img{height:48px}
   .nav-links{display:none}
-  .nav-links.open{display:flex;position:absolute;top:70px;left:0;right:0;flex-direction:column;background:var(--ink);padding:18px 24px;gap:16px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .nav-links.open{display:flex;position:absolute;top:80px;left:0;right:0;flex-direction:column;background:#fff;padding:18px 24px;gap:16px;border-bottom:1px solid var(--line);box-shadow:0 12px 20px rgba(16,24,32,.10)}
   .burger{display:block}
   .nav-phone small{display:none}
 }
 @media(max-width:540px){
   .why-grid,.clients-grid,.foot,.stats{grid-template-columns:1fr}
+  .nav{height:72px}
+  .brand img{height:42px}
+  .nav-links.open{top:72px}
+  /* on a phone, tap-to-call matters more than the quote button, which the hero repeats */
+  .nav-cta .btn{display:none}
 }
