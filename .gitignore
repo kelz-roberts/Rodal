@@ -1,0 +1,5 @@
+# Mac housekeeping files
+.DS_Store
+
+# Third-party reference material — kept locally, not published
+uksrg.txt
