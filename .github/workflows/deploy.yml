@@ -27,7 +27,7 @@ env:
   AWS_ROLE_ARN: arn:aws:iam::794285266314:role/rodal-website-deploy
   SITE_BUCKET: rodal-website-794285266314
   # From `tofu output cloudfront_distribution_id` in Tofu-iac/infra/environments/rodal-prod.
-  CLOUDFRONT_DISTRIBUTION_ID: __CLOUDFRONT_DISTRIBUTION_ID__
+  CLOUDFRONT_DISTRIBUTION_ID: E31Q4CVRKOALH2
 
 jobs:
   deploy:

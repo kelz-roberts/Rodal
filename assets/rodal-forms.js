@@ -7,7 +7,7 @@
 (function () {
   // Set by the infrastructure — see `tofu output contact_form_endpoint` in
   // Tofu-iac/infra/environments/rodal-prod.
-  var ENDPOINT = "__CONTACT_API_ENDPOINT__";
+  var ENDPOINT = "https://h0agcdigd7.execute-api.eu-west-2.amazonaws.com/contact";
 
   function text(el) {
     return (el.textContent || "").replace(/\s+/g, " ").trim();
