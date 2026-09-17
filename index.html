@@ -280,13 +280,21 @@
       <div class="line">📍 Unit 7, Knightcott Industrial Estate, Banwell, BS29 6JN</div>
       <div class="accred"><span>FSB Member</span><span>SafeContractor Approved</span></div>
     </div>
-    <form onsubmit="event.preventDefault();this.innerHTML='<p style=\'color:#fff;font-weight:700;padding:20px 0\'>Thanks — we\'ll be in touch shortly. (Demo form — not yet connected.)</p>'">
+    <form onsubmit="return rodalSubmit(event, 'enquirySent', 'Website enquiry')">
       <div><label>Name</label><input required placeholder="Your name" /></div>
       <div><label>Email</label><input type="email" required placeholder="you@company.com" /></div>
       <div><label>Phone</label><input placeholder="Best number to reach you" /></div>
       <div><label>How can we help?</label><textarea rows="4" placeholder="e.g. slippery tiled reception, pool surround, need a pendulum test..."></textarea></div>
+      <!-- Spam trap: hidden from people, filled in by bots. Submissions with
+           this set are silently discarded. Not visible on the page. -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
       <button class="btn btn-primary" type="submit">Send enquiry</button>
     </form>
+    <!-- Shown in place of the form once an enquiry has been sent. -->
+    <div id="enquirySent" style="display:none; border-left:4px solid var(--accent); background:rgba(255,255,255,.06); border-radius:10px; padding:20px 22px; align-self:start;">
+      <h3 style="color:#fff; margin:0 0 .4em;">Thank you — message sent</h3>
+      <p style="margin:0;">We've received your enquiry and will get straight back to you. If it's urgent, please call us free on <a href="tel:08000029078" style="color:#fff; font-weight:700;">0800 002 9078</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -329,5 +337,6 @@
   </div>
 </footer>
 
+<script src="assets/rodal-forms.js"></script>
 </body>
 </html>

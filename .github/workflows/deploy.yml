@@ -1,0 +1,67 @@
+name: Deploy site
+
+# Deploys the static site to S3 + CloudFront on every push to main.
+# Authentication is keyless via GitHub OIDC -> the rodal-website-deploy IAM role.
+#
+# The values below are NOT secrets: the ARN/bucket/distribution-id are useless
+# without the ability to assume the role, which is gated by the OIDC trust
+# policy (only this repo's main branch can assume it).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# Required for GitHub OIDC.
+permissions:
+  id-token: write
+  contents: read
+
+# Never run two deploys at once.
+concurrency:
+  group: deploy-rodal-prod
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: eu-west-2
+  AWS_ROLE_ARN: arn:aws:iam::794285266314:role/rodal-website-deploy
+  SITE_BUCKET: rodal-website-794285266314
+  # From `tofu output cloudfront_distribution_id` in Tofu-iac/infra/environments/rodal-prod.
+  CLOUDFRONT_DISTRIBUTION_ID: E31Q4CVRKOALH2
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Upload the site VERBATIM. No build, no minify, no transform — the files
+      # served are byte-identical to what's in the repo. --delete keeps S3 in
+      # sync with the repo (removes files deleted from the repo). Repo metadata,
+      # CI files and the knowledge-base Markdown sources are excluded so only
+      # site content is published.
+      - name: Sync site to S3
+        run: |
+          aws s3 sync . "s3://${SITE_BUCKET}" \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude ".gitignore" \
+            --exclude ".gitattributes" \
+            --exclude "README*" \
+            --exclude "CLAUDE.md" \
+            --exclude "knowledge-base/*"
+
+      # Clear the CDN cache so changes appear immediately.
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" \
+            --paths "/*"
