@@ -66,8 +66,8 @@ then open `http://localhost:8000`.
 ## Not live yet
 
 The site is being set up on its hosting. Until launch, `index.html` carries a
-`<meta name="robots" content="noindex">` tag and a "PROTOTYPE" banner at the top. Both
-come out at launch, **only** once the real web address serves the site — not before.
+`<meta name="robots" content="noindex">` tag. It comes out at launch, **only** once the
+real web address serves the site — not before.
 
 ## What is NOT in this repo
 
