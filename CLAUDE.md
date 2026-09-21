@@ -63,11 +63,12 @@ then open `http://localhost:8000`.
 - **If a page is ever added**, link it from the nav or the Knowledge Base hub, and add
   its address to `sitemap.xml` (once that exists, at launch) or Google won't find it.
 
-## Not live yet
+## Live
 
-The site is being set up on its hosting. Until launch, `index.html` carries a
-`<meta name="robots" content="noindex">` tag. It comes out at launch, **only** once the
-real web address serves the site — not before.
+The site went live at **https://www.rodal.co.uk** on 21 September 2026. `rodal.co.uk`
+(without www) and the old address `rodalantislipfloors.co.uk` both redirect to it.
+`sitemap.xml` lists the six pages and `robots.txt` points search engines at it — if a
+page is ever added or removed, update `sitemap.xml` to match.
 
 ## What is NOT in this repo
 
