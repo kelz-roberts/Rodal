@@ -22,7 +22,7 @@ The threshold isn't arbitrary. It traces back to research carried out by the **B
 | --- | --- |
 | 0.19 | 1 in 2 |
 | 0.24 | 1 in 20 |
-| 0.29 | 1 in 1,000 |
+| 0.29 | 1 in 10,000 |
 | 0.34 | 1 in 100,000 |
 | 0.36 | 1 in 1,000,000 |
 
